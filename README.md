@@ -9,7 +9,7 @@
 | 3.高级排序问题(归并、快速排序)    |   整理中 |未开始|
 | 4.堆和堆排序     |   整理中 |未开始|
 | 5.二分搜索树     |  整理中 |未开始|
-| 6.并查集     |   [链接](https://github.com/jawhiow/algorithm-cpp/tree/master/UnionFind) |进行中|
+| 6.并查集     |   [笔记](https://github.com/jawhiow/algorithm-cpp/tree/master/UnionFind) |进行中|
 | 7.图论基础(DFS、BFS)    |   整理中 |未开始|
 | 8.最小生成树     |   整理中 |未开始|
 | 9.最短路径     |   整理中 |未开始|
