@@ -10,8 +10,8 @@ namespace Uf {
     class UnionFind {
 
     protected:
-        int count; // 创建一个数组存储
-        int *id; // 数据的个数
+        int count; // 数据的个数
+        int *id; // 创建一个数组存储
 
     public:
         explicit UnionFind(int n) {
@@ -27,8 +27,8 @@ namespace Uf {
         }
 
         virtual int find(int x) = 0;
-        virtual void unionElements(int a, int b) = 0;
-        virtual bool isConnected(int a, int b) = 0;
+        virtual void unionElements(int x, int y) = 0;
+        virtual bool isConnected(int x, int y) = 0;
     };
 }
 

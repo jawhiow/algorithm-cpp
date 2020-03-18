@@ -7,5 +7,6 @@
 using namespace std;
 
 int main() {
-    UnionFindTestHelper::testUf1(10000);
+    UnionFindTestHelper::testUf1(100000);
+    UnionFindTestHelper::testUf2(100000);
 }

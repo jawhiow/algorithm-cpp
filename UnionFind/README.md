@@ -19,7 +19,7 @@ bool isConnected(int x, int y); // 判断两个元素是否连接
 
 ## 实现和优化
 ### UnionFind1 实现
-第一个版本的实现非常简单，具体实现参考[这里](https://github.com/jawhiow/algorithm-cpp/blob/master/UnionFind/UnionFind1.h)，时间复杂度是O(n)，可见效率也不会太高，但确实后面实现的基础。
+第一个版本的实现非常简单，具体实现参考[这里](https://github.com/jawhiow/algorithm-cpp/blob/master/UnionFind/UnionFind1.h)，时间复杂度是O(n)，可见效率也不会太高，但却是后面实现的基础。
 - 对于`find`函数，直接返回数组中对应元素的值，代码如下：
 
 ```cpp
@@ -49,3 +49,43 @@ bool isConnected(int x, int y) override {
 	return find(x) == find(y);
 }
 ```
+
+### UnionFind2 实现
+在第一个版本的实现中，我们的`id`数组存储的是当前节点根节点，也就是当前节点属于哪一个组中，这个版本的实现参考[此处](https://github.com/jawhiow/algorithm-cpp/blob/master/UnionFind/UnionFind2.h)。
+
+举个并查集的经典例子，在倚天屠龙记中，现在要判断`殷野王`和`宋青书`是不是一个门派（组）的，那么版本一中`id[殷野王]=张无忌`，`id[宋青书]=张三丰`，所以凭借`id`数组，`find`函数查找起来非常快，但是`unionElements`就很慢了，毕竟像明教这样人多势众的，如果要合并门派就要把所有人的`id`改一下。
+
+版本二中，我们试着让`unionElements`快一点，我们让`id`改成存节点的父亲，而不是根节点。以上面的例子来说，现在`id[殷野王]=白眉鹰王`，这样存储了以后，很明显`find`函数变成了一个不断向上查找的过程，最终找到根节点，比如`id[殷野王]=白眉鹰王`，`id[白眉鹰王]=张无忌`，所以通过这样查找出了`殷野王`是张无忌这一派的。
+
+那它使得`unionElement`快在哪了呢？比如现在我想让`殷野王`和`宋青书`合成一排，直接把`张三丰`链接到`张无忌`下面即可，所以从原来版本一中查找`武当所有弟子`变成了只需要从`宋青书`顺藤摸瓜找到张三丰即可，这样查找的次数就变成了树的高度，而我们知道大部分树的高度是远小于树节点个数的。所以虽然最坏条件下时间复杂度仍是O(n)，但也提高了效率，所以最终三个函数的实现如下：
+
+- 首先注意：在版本二中`id`数组存储的为当前节点的父节点。
+- 对于`find`函数，在这个版本中需要不断向上寻找根节点，实现如下
+
+```cpp
+// 查找过程, 查找元素x所对应的集合编号
+// O(h)复杂度, h为树的高度
+int find(int x) {
+    while (x != id[x]) {
+        x = id[x];
+    }
+    return x;
+}
+```
+- 对于`unionElements`函数，这个版本中只需要把`x`的根节点合并到`y`的根节点中即可，实现如下：
+
+```cpp
+// 合并元素x和元素y所属的集合
+// O(h)复杂度, h为树的高度
+void unionElements(int x, int y) {
+    int rootX = find(x);
+    int rootY = find(y);
+    if (rootX == rootY) {
+        return;
+    }
+    id[rootX] = rootY;
+}
+```
+- 对于`isConnected`并无改变，不做补充了，同时`isConnected`函数我们发现所有版本的实现基本一样，可以考虑提升到基类`UnionFind`中。
+
+最终两个版本在`main`函数中对比测试100000步：版本一耗时19秒，版本二耗时8秒，可见提升很明显。

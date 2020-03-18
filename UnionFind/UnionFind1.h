@@ -36,6 +36,7 @@ class UnionFind1 : public Uf::UnionFind{
         }
 
         int find(int x) override {
+            assert(x >= 0 && x < count);
             return id[x];
         }
 
