@@ -57,15 +57,7 @@ namespace UF1{
             return find(x) == find(y);
         }
 
-
-
-
-
     };
-
-
-
-
 }
 
 
