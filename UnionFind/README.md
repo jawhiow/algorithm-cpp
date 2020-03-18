@@ -89,3 +89,35 @@ void unionElements(int x, int y) {
 - 对于`isConnected`并无改变，不做补充了，同时`isConnected`函数我们发现所有版本的实现基本一样，可以考虑提升到基类`UnionFind`中。
 
 最终两个版本在`main`函数中对比测试100000步：版本一耗时19秒，版本二耗时8秒，可见提升很明显。
+
+### UnionFind3 实现
+第三个版本实现的代码参考[此处](https://github.com/jawhiow/algorithm-cpp/blob/master/UnionFind/UnionFind3.h)。
+
+在第二个版本的基础上，我们能不能够进一步优化效率呢？先一起来看一个例子：
+假设有两个组情况是`1->2->3->4->5->6`(记作x组)和`7->8->9`(记作y组)总上一步`unionElements`函数的代码中，我们知道执行的是`id[rootX] = rootY;`，所以将上面两个组合并，按照代码是将`x组`合并到`y组`中去，合并以后的新组比`x组`高度大1。可以看到这样的合并会使得树的高度增加，而我们现在不管是`合并`还是`寻找`，时间复杂度都和高度相关，所以这样子的合并是应当避免的。
+
+那么应该如何改进呢？直观来说，**我们应当把个数少的组合并到个数多的组中去**，如上述例子，大概率个数越多，高度越高，所以这样大概率可以提升效率（注意不是绝对）。
+
+所以可以维护一个数组`sz`，`sz[i]`表示以`i`为根的集合中元素个数，那么在版本二的基础上，我们对`unionElements`函数稍作修改如下，核心代码主要是增加了一段判断组数量大小的逻辑，把数量少的合并到数量多组中去，同时合并以后维护新组的数量。(关于`sz`数组的维护具体可以参考详细代码)
+
+```cpp
+void unionElements(int x, int y) {
+    int rootX = find(x);
+    int rootY = find(y);
+    if (rootX == rootY) {
+        return;
+    }
+    // 希望将数量少的合并到数量大的上
+    if (sz[rootX] > sz[rootY]) {
+        // 将rootY合并到rootX中
+        id[rootY] = rootX;
+        sz[rootX] += sz[rootY];
+    } else{
+        id[rootX] = rootY;
+        sz[rootY] += sz[rootX];
+    }
+}
+```
+
+同样对10万次进行测试，版本二花费9秒，而版本三只花费0.02秒，可见速度有了极大提升。
+

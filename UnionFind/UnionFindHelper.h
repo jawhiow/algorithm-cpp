@@ -9,6 +9,7 @@
 #include <ctime>
 #include "UnionFind1.h"
 #include "UnionFind2.h"
+#include "UnionFind3.h"
 #include "UnionFind.h"
 
 namespace UnionFindTestHelper {
@@ -23,6 +24,12 @@ namespace UnionFindTestHelper {
     void testUf2 (int n) {
         Uf2::UnionFind2 uf2 = Uf2::UnionFind2(n);
         Uf::UnionFind &uf = uf2;
+        testUf(n, uf);
+    }
+
+    void testUf3 (int n) {
+        Uf3::UnionFind3 uf3 = Uf3::UnionFind3(n);
+        Uf::UnionFind &uf = uf3;
         testUf(n, uf);
     }
 
