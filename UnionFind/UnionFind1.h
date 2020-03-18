@@ -7,35 +7,21 @@
 
 #include <iostream>
 #include <cassert>
+#include "UnionFind.h"
 
 using namespace std;
 
 // 第一版的UnionFind，实现比较暴力，时间复杂度为O(n)，空间复杂度为O(n)
-
 namespace UF1{
 
-    class UnionFind{
-
-    private:
-        int *id; // 创建一个数组存储
-        int count; // 数据的个数
+class UnionFind1 : public Uf::UnionFind{
 
     public:
-        UnionFind(int n) {
-            count = n;
-            id = new int[n];
 
-            // 初始化数据，每个id[i]=i，也就是指向自己
-            for (int i = 0; i < n; ++i) {
-                id[i] = i;
-            }
-        }
+        explicit UnionFind1(int n) : UnionFind(n) {}
 
-        ~UnionFind(){
-            delete[] id;
-        }
-
-        void unionElements(int x, int y) {
+        ~UnionFind1() = default;
+        void unionElements(int x, int y) override {
             int xId = find(x);
             int yId = find(y);
 
@@ -49,11 +35,11 @@ namespace UF1{
             }
         }
 
-        int find(int x) {
+        int find(int x) override {
             return id[x];
         }
 
-        bool isConnected(int x, int y) {
+        bool isConnected(int x, int y) override {
             return find(x) == find(y);
         }
 

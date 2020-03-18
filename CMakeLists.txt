@@ -3,4 +3,4 @@ project(algorithm)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(unionFind UnionFind/main.cpp UnionFind/UnionFind1.h UnionFind/UnionFindHelper.h)
+add_executable(unionFind UnionFind/main.cpp UnionFind/UnionFind1.h UnionFind/UnionFindHelper.h UnionFind/UnionFind.h)

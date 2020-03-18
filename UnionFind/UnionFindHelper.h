@@ -8,12 +8,19 @@
 #include <iostream>
 #include <ctime>
 #include "UnionFind1.h"
+#include "UnionFind.h"
 
 namespace UnionFindTestHelper {
+    void testUf(int n, Uf::UnionFind &uf);
 
-    void testUf1(int n) {
+    void testUf1 (int n) {
+        UF1::UnionFind1 uf1 = UF1::UnionFind1(n);
+        Uf::UnionFind &uf = uf1;
+        testUf(n, uf);
+    }
+
+    void testUf(int n, Uf::UnionFind &uf) {
         srand(time(nullptr));
-        UF1::UnionFind uf = UF1::UnionFind(n);
         time_t startTime = clock();
 
         // 进行n次操作，每次随机选择两个元素进行合并操作
