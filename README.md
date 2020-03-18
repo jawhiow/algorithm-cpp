@@ -1,5 +1,5 @@
 ## 项目介绍
-本项目在liuyubobobo老师在慕课网的课程[算法与数据结构](https://coding.imooc.com/class/chapter/71.html#Anchor)的基础上进行一些算法的实现，其中每一章的文件夹下都会添加理论部分笔记和对应实现的代码，因最近秋招准备入职，需要使用c++，故而语言采用c++。
+本项目在liuyubobobo老师在慕课网的课程[《算法与数据结构》](https://coding.imooc.com/class/chapter/71.html#Anchor)的基础上进行一些算法的实现，其中每一章的文件夹下都会添加理论部分笔记和对应实现的代码，因最近秋招准备入职，需要使用c++，故而语言采用c++。
 
 ## 实现的章节
 
