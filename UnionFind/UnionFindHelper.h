@@ -10,6 +10,7 @@
 #include "UnionFind1.h"
 #include "UnionFind2.h"
 #include "UnionFind3.h"
+#include "UnionFind4.h"
 #include "UnionFind.h"
 
 namespace UnionFindTestHelper {
@@ -30,6 +31,12 @@ namespace UnionFindTestHelper {
     void testUf3 (int n) {
         Uf3::UnionFind3 uf3 = Uf3::UnionFind3(n);
         Uf::UnionFind &uf = uf3;
+        testUf(n, uf);
+    }
+
+    void testUf4 (int n) {
+        Uf4::UnionFind4 uf4 = Uf4::UnionFind4(n);
+        Uf::UnionFind &uf = uf4;
         testUf(n, uf);
     }
 
